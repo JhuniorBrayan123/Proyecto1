@@ -4,7 +4,7 @@ import { Dashboard } from './business/dashboard/dashboard';
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./shared/components/layout/layout').then((m) => m.default),
+    loadComponent: () => import('./shared/components/layout/layout').then((m) => m.Layout),
     children: [
       {
         path: 'dashboard',
