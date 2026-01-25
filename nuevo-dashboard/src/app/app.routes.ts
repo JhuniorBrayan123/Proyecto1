@@ -1,23 +1,32 @@
 import { Routes } from '@angular/router';
-import { Services } from './shared/services/services';
+import { Dashboard } from './business/dashboard/dashboard';
 
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./shared/components/layout/layout'),
+    loadComponent: () => import('./shared/components/layout/layout').then((m) => m.default),
     children: [
       {
         path: 'dashboard',
-        loadComponent: () => import('./business/dashboard/dashboard').then(m => m.Dashboard),
+        loadComponent: () => import('./business/dashboard/dashboard').then((m) => m.Dashboard),
       },
       {
         path: 'profile',
-        loadComponent: () => import('./business/profile/profile').then(m => m.Profile),
+        loadComponent: () => import('./business/profile/profile').then((m) => m.Profile),
       },
       {
         path: 'tables',
-        loadComponent: () => import('./business/tables/tables').then(m => m.Tables),
+        loadComponent: () => import('./business/tables/tables').then((m) => m.Tables),
+      },
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
       },
     ],
+  },
+  {
+    path: '**',
+    redirectTo: 'dashboard',
   },
 ];
